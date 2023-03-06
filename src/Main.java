@@ -94,7 +94,7 @@ public class Main {
       position = requestLine.indexOf(" ");
 
       String requestFileName = requestLine.substring(position + 1);
-      String requestOperation = requestLine.substring(0, position);
+      String requestOperation = requestLine.substring(0, position).toUpperCase();
 
       if (fileName.get(requestFileName).contains(requestOperation)) {
         System.out.println(requestFileName + ": " + requestOperation + ": OK");
