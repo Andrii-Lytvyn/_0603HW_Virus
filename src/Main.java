@@ -79,35 +79,28 @@ public class Main {
       }
       fileName.put(name, fileOperations);
     }
-    for (Map.Entry<String, List<String>> entry : fileName.entrySet()) {
-      System.out.println(entry.getKey() + " " + entry.getValue());
-    }
+//    for (Map.Entry<String, List<String>> entry : fileName.entrySet()) {
+//      System.out.println(entry.getKey() + " " + entry.getValue());
+//    }
     int m = Integer.parseInt(br.readLine());
 
 
-    Map<String, List<String>> request = new HashMap<>();
-
+    // Map<String, List<String>> request = new HashMap<>();
+    System.out.println();
     for (int i = 0; i < m; i++) {
-      List<String> requestList = new LinkedList<>();
+      //List<String> requestList = new LinkedList<>();
 
       String requestLine = br.readLine();
       position = requestLine.indexOf(" ");
 
       String requestFileName = requestLine.substring(position + 1);
-      String requestOperation = requestLine.substring(0, position).toUpperCase();
+      String requestOperation = requestLine.substring(0, position);
 
-      if (requestOperation.contains(permission.WRITE.toString())) {
-        requestList.add(requestOperation);
+      if (fileName.get(requestFileName).contains(requestOperation)) {
+        System.out.println(requestFileName + ": " + requestOperation + ": OK");
+      } else {
+        System.out.println(requestFileName + ": " + requestOperation + ": Access denied");
       }
-      if (requestOperation.contains(permission.EXECUTE.toString())) {
-        requestList.add(requestOperation);
-
-      }
-      if (requestOperation.contains(permission.READ.toString())) {
-        requestList.add(requestOperation);
-      }
-
-      request.put(requestFileName, requestList);
 
     }
 //    read nya
