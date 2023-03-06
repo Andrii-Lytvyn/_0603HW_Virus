@@ -44,10 +44,46 @@ pinglog: write: OK
 */
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
 public class Main {
-  public static void main(String[] args) {
+  enum permission {
+    WRITE,
+    READ,
+    EXECUTE,
+  }
 
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    int position;
+    Map<String, List<String>> fileName = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      List<String> fileOperations = new LinkedList<>();
+      String nameAndOperation = br.readLine();
+      position = nameAndOperation.indexOf(" ");
+      String name = nameAndOperation.substring(0, position);
+      String operations = nameAndOperation.substring(position + 1);
 
+      if (operations.contains("W")) {
+        fileOperations.add(permission.WRITE.toString());
+      }
+      if (operations.contains("X")) {
+        fileOperations.add(permission.EXECUTE.toString());
+      }
+      if (operations.contains("R")) {
+        fileOperations.add(permission.READ.toString());
+      }
+      fileName.put(name, fileOperations);
+    }
+    for (Map.Entry<String, List<String>> entry : fileName.entrySet()) {
+      System.out.println(entry.getKey() + " " + entry.getValue());
+    }
 
   }
+
+
 }
