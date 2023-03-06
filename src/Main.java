@@ -51,9 +51,7 @@ import java.util.*;
 
 public class Main {
   enum permission {
-    WRITE,
-    READ,
-    EXECUTE,
+    WRITE, READ, EXECUTE,
   }
 
   public static void main(String[] args) throws IOException {
@@ -61,8 +59,10 @@ public class Main {
     int n = Integer.parseInt(br.readLine());
     int position;
     Map<String, List<String>> fileName = new HashMap<>();
+
     for (int i = 0; i < n; i++) {
       List<String> fileOperations = new LinkedList<>();
+
       String nameAndOperation = br.readLine();
       position = nameAndOperation.indexOf(" ");
       String name = nameAndOperation.substring(0, position);
@@ -82,7 +82,39 @@ public class Main {
     for (Map.Entry<String, List<String>> entry : fileName.entrySet()) {
       System.out.println(entry.getKey() + " " + entry.getValue());
     }
+    int m = Integer.parseInt(br.readLine());
 
+
+    Map<String, List<String>> request = new HashMap<>();
+
+    for (int i = 0; i < m; i++) {
+      List<String> requestList = new LinkedList<>();
+
+      String requestLine = br.readLine();
+      position = requestLine.indexOf(" ");
+
+      String requestFileName = requestLine.substring(position + 1);
+      String requestOperation = requestLine.substring(0, position).toUpperCase();
+
+      if (requestOperation.contains(permission.WRITE.toString())) {
+        requestList.add(requestOperation);
+      }
+      if (requestOperation.contains(permission.EXECUTE.toString())) {
+        requestList.add(requestOperation);
+
+      }
+      if (requestOperation.contains(permission.READ.toString())) {
+        requestList.add(requestOperation);
+      }
+
+      request.put(requestFileName, requestList);
+
+    }
+//    read nya
+//    write helloworld.exe
+//    execute nya
+//    read pinglog
+//    write pinglog
   }
 
 
